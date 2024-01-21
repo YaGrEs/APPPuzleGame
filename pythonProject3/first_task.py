@@ -12,21 +12,49 @@ from PyQt6.QtGui import QPainter, QBrush, QColor
 import random
 from PyQt6.QtCore import Qt
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
+        fun = self.ind()
         Form.setObjectName("Form")
         Form.resize(600, 400)
+        font = QtGui.QFont()
+        font.setFamily("Dela Gothic One")
+        Form.setFont(font)
+        self.answer = QtWidgets.QLineEdit(Ui_Form.check(self, fun))
+        self.answer.setVisible(False)
         self.label = QtWidgets.QLabel(parent=Form)
-        self.label.setGeometry(QtCore.QRect(210, 290, 301, 61))
+        self.label.setGeometry(QtCore.QRect(225, 280, 301, 61))
         font = QtGui.QFont()
         font.setFamily("Dela Gothic One")
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(parent=Form)
+        self.label_2.setGeometry(QtCore.QRect(160, 40, 291, 231))
+        self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.Yes = QtWidgets.QPushButton(parent=Form)
+        self.Yes.setGeometry(QtCore.QRect(140, 340, 41, 41))
+        font = QtGui.QFont()
+        font.setFamily("Dela Gothic One")
+        self.Yes.setFont(font)
+        self.Yes.setStyleSheet("background-color: rgb(255, 255, 0);\n"
+"border: 0px solid; border-radius: 20px;")
+        self.Yes.setObjectName("pushButton")
+        self.No = QtWidgets.QPushButton(parent=Form)
+        self.No.setGeometry(QtCore.QRect(435, 340, 41, 41))
+        font = QtGui.QFont()
+        font.setFamily("Dela Gothic One")
+        self.No.setFont(font)
+        self.No.setStyleSheet("background-color: rgb(255, 255, 0);\n"
+"border: 0px solid; border-radius: 20px;")
+        self.No.setObjectName("pushButton_2")
         self.a = QtWidgets.QWidget(parent=Form)
         self.a.setGeometry(QtCore.QRect(130, 30, 350, 250))
         layout = QHBoxLayout()
-        view = QGraphicsView(Ui_Form.draw_something(self))
+        view = QGraphicsView(Ui_Form.draw_something(self, fun))
         layout.addWidget(view)
         self.a.setLayout(layout)
         self.retranslateUi(Form)
@@ -36,33 +64,29 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Is this correct?"))
+        self.Yes.setText(_translate("Form", "V"))
+        self.No.setText(_translate("Form", "X"))
 
     def setColor(self):
         colorlist = ["Green", "Red", "Yellow", "Blue", "Black", "Pink", "Gray", "Orange", "Purple"]
         number = random.randint(0, len(colorlist) - 1)
         return colorlist[number]
 
-    def draw_something(self):
-        scene = QGraphicsScene(0, 0, 0, 0)
-        finalcolors = []
-        finalcolors.append(Ui_Form.setColor(self))
-        finalcolors.append(Ui_Form.setColor(self))
+    def check(self, ls):
+        if ls[0] == ls[2] and ls[1] == ls[3]:
+            return '1'
+        else:
+            return '0'
+
+    def ind(self):
+        inds = []
         f = random.randint(0, 1)
         if f == 1:
             s = 0
         else:
             s = 1
-        firstround = QGraphicsEllipseItem(-150, -100, 70, 70)
-        br = QBrush(QColor(finalcolors[f]))
-        firstround.setBrush(br)
-        scene.addItem(firstround)
-        secondround = QGraphicsEllipseItem(0, -100, 70, 70)
-        br = QBrush(QColor(finalcolors[s]))
-        secondround.setBrush(br)
-        scene.addItem(secondround)
-        font = QtGui.QFont()
-        font.setFamily("Dela Gothic One")
-        font.setPointSize(10)
+        inds.append(f)
+        inds.append(s)
         f = random.randint(0, 1)
         if f == 1:
             s = 0
@@ -73,14 +97,36 @@ class Ui_Form(object):
             s2 = 0
         else:
             s2 = 1
-        text1 = scene.addText(finalcolors[f])
+        inds.append(f)
+        inds.append(s)
+        inds.append(f2)
+        inds.append(s2)
+        return inds
+
+
+    def draw_something(self, num):
+        scene = QGraphicsScene(0, 0, 0, 0)
+        finalcolors = []
+        x = num
+        finalcolors.append(Ui_Form.setColor(self))
+        finalcolors.append(Ui_Form.setColor(self))
+        firstround = QGraphicsEllipseItem(-150, -100, 70, 70)
+        br = QBrush(QColor(finalcolors[x[0]]))
+        firstround.setBrush(br)
+        scene.addItem(firstround)
+        secondround = QGraphicsEllipseItem(0, -100, 70, 70)
+        br = QBrush(QColor(finalcolors[x[1]]))
+        secondround.setBrush(br)
+        scene.addItem(secondround)
+        font = QtGui.QFont()
+        font.setFamily("Dela Gothic One")
+        font.setPointSize(10)
+        text1 = scene.addText(finalcolors[x[2]])
         text1.setFont(font)
         text1.setPos(-142, 0)
-        text1.setDefaultTextColor(QColor(finalcolors[f2]))
-        text1 = scene.addText(finalcolors[s])
-        text1.setFont(font)
-        text1.setPos(10, 0)
-        text1.setDefaultTextColor(QColor(finalcolors[s2]))
+        text1.setDefaultTextColor(QColor(finalcolors[x[4]]))
+        text2 = scene.addText(finalcolors[x[3]])
+        text2.setFont(font)
+        text2.setPos(10, 0)
+        text2.setDefaultTextColor(QColor(finalcolors[x[5]]))
         return scene
-
-

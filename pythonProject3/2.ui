@@ -10,14 +10,19 @@
     <height>400</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Dela Gothic One</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>290</y>
+     <x>225</x>
+     <y>280</y>
      <width>301</width>
      <height>61</height>
     </rect>
@@ -46,6 +51,50 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>340</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Dela Gothic One</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);
+border: 0px solid; border-radius: 20px;</string>
+   </property>
+   <property name="text">
+    <string>V</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>340</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Dela Gothic One</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);
+border: 0px solid; border-radius: 20px;</string>
+   </property>
+   <property name="text">
+    <string>X</string>
    </property>
   </widget>
  </widget>
